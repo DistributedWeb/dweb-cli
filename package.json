@@ -1,7 +1,7 @@
 {
-  "name": "dat",
-  "version": "13.13.1",
-  "description": "Dat is the package manager for data. Easily share and version control data.",
+  "name": "dweb-cli",
+  "version": "1.0.0",
+  "description": "Official command-line tool for the dWeb",
   "keywords": [
     "dat",
     "dat protocol",
@@ -11,7 +11,7 @@
   ],
   "main": "index.js",
   "bin": {
-    "dat": "bin/cli.js"
+    "dweb": "bin/dweb.js"
   },
   "scripts": {
     "auth-server": "DEBUG=* node scripts/auth-server.js",
@@ -40,13 +40,13 @@
     "bytes": "^3.1.0",
     "chalk": "^2.4.2",
     "cli-truncate": "^1.0.0",
-    "dat-doctor": "^2.1.2",
-    "dat-encoding": "^5.0.1",
-    "dat-json": "^1.0.3",
-    "dat-link-resolve": "^2.3.0",
-    "dat-log": "^1.2.0",
-    "dat-node": "^3.5.15",
-    "dat-registry": "^4.0.1",
+    "dweb-doctor": "^1.0.0",
+    "dweb-encoding": "^1.0.0",
+    "dweb-json": "^1.0.0",
+    "dweb-link-resolve": "^1.0.0",
+    "dweb-log": "^1.0.0",
+    "dweb-core": "^1.0.0",
+    "dweb-registry": "^1.0.0",
     "debug": "^4.0.0",
     "neat-log": "^3.1.0",
     "prettier-bytes": "^1.0.3",
@@ -62,8 +62,8 @@
   "devDependencies": {
     "cross-zip-cli": "^1.0.0",
     "dependency-check": "^3.3.0",
-    "hypercore": "^6.25.2",
-    "hyperdiscovery": "^8.0.0",
+    "ddatabase": "^1.3.0",
+    "dweb-discovery": "^1.0.0",
     "mkdirp": "^0.5.1",
     "pkg": "^4.3.7",
     "random-access-memory": "^3.1.1",
