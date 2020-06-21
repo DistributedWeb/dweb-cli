@@ -11,7 +11,7 @@
   ],
   "main": "index.js",
   "bin": {
-    "dweb": "bin/dweb.js"
+    "dweb": "bin/cli.js"
   },
   "scripts": {
     "auth-server": "DEBUG=* node scripts/auth-server.js",
