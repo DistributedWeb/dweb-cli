@@ -1,11 +1,11 @@
 var test = require('tape')
 var ram = require('random-access-memory')
-var Dat = require('..')
+var DWeb = require('..')
 
-test('dat-node: require dat-node + make a dat', function (t) {
-  Dat(ram, function (err, dat) {
+test('dwebs-core: require dwebs-core + make a dWeb archive', function (t) {
+  DWeb(ram, function (err, dweb) {
     t.error(err, 'no error')
-    t.ok(dat, 'makes dat')
+    t.ok(dweb, 'makes dWeb archive')
     t.pass('yay')
     t.end()
   })

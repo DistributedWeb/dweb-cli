@@ -2,11 +2,11 @@ module.exports = {
   name: 'logout',
   command: logout,
   help: [
-    'Logout from current Dat registry server',
-    'Usage: dat logout [<registry>]',
+    'Logout from current dWeb registry server',
+    'Usage: dweb logout [<registry>]',
     '',
     'Specify server if you want to from non-active other server.',
-    'Check active server with `dat whoami`.'
+    'Check active server with `dweb whoami`.'
   ].join('\n'),
   options: [
     {

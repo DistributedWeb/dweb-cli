@@ -8,30 +8,30 @@ VERSION=$(node -pe "require('./package.json').version")
 rm -rf dist
 
 mkdir dist
-mkdir builds/dat-$VERSION-linux-x64
-mkdir builds/dat-$VERSION-macos-x64
-mkdir builds/dat-$VERSION-win-x64
+mkdir builds/dweb-$VERSION-linux-x64
+mkdir builds/dweb-$VERSION-macos-x64
+mkdir builds/dweb-$VERSION-win-x64
 
-mv builds/dat-linux builds/dat-$VERSION-linux-x64/dat
-mv builds/dat-macos builds/dat-$VERSION-macos-x64/dat
-mv builds/dat-win.exe builds/dat-$VERSION-win-x64/dat.exe
+mv builds/dweb-linux builds/dweb-$VERSION-linux-x64/dweb
+mv builds/dweb-macos builds/dweb-$VERSION-macos-x64/dweb
+mv builds/dweb-win.exe builds/dweb-$VERSION-win-x64/dweb.exe
 
-cp node_modules/utp-native/prebuilds/linux-x64/$NODE_ABI.node builds/dat-$VERSION-linux-x64/
-cp node_modules/utp-native/prebuilds/darwin-x64/$NODE_ABI.node builds/dat-$VERSION-macos-x64/
-cp node_modules/utp-native/prebuilds/win32-x64/$NODE_ABI.node builds/dat-$VERSION-win-x64/
+cp node_modules/utp-native/prebuilds/linux-x64/$NODE_ABI.node builds/dweb-$VERSION-linux-x64/
+cp node_modules/utp-native/prebuilds/darwin-x64/$NODE_ABI.node builds/dweb-$VERSION-macos-x64/
+cp node_modules/utp-native/prebuilds/win32-x64/$NODE_ABI.node builds/dweb-$VERSION-win-x64/
 
-cp LICENSE builds/dat-$VERSION-linux-x64/
-cp LICENSE builds/dat-$VERSION-macos-x64/
-cp LICENSE builds/dat-$VERSION-win-x64/
+cp LICENSE builds/dweb-$VERSION-linux-x64/
+cp LICENSE builds/dweb-$VERSION-macos-x64/
+cp LICENSE builds/dweb-$VERSION-win-x64/
 
-cp README.md builds/dat-$VERSION-linux-x64/README
-cp README.md builds/dat-$VERSION-macos-x64/README
-cp README.md builds/dat-$VERSION-win-x64/README
+cp README.md builds/dweb-$VERSION-linux-x64/README
+cp README.md builds/dweb-$VERSION-macos-x64/README
+cp README.md builds/dweb-$VERSION-win-x64/README
 
 cd builds
-../node_modules/.bin/cross-zip dat-$VERSION-linux-x64 ../dist/dat-$VERSION-linux-x64.zip
-../node_modules/.bin/cross-zip dat-$VERSION-macos-x64 ../dist/dat-$VERSION-macos-x64.zip
-../node_modules/.bin/cross-zip dat-$VERSION-win-x64 ../dist/dat-$VERSION-win-x64.zip
+../node_modules/.bin/cross-zip dweb-$VERSION-linux-x64 ../dist/dweb-$VERSION-linux-x64.zip
+../node_modules/.bin/cross-zip dweb-$VERSION-macos-x64 ../dist/dweb-$VERSION-macos-x64.zip
+../node_modules/.bin/cross-zip dweb-$VERSION-win-x64 ../dist/dweb-$VERSION-win-x64.zip
 
 rm -rf builds
 

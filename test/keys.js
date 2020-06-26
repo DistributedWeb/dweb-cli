@@ -6,17 +6,17 @@ var tempDir = require('temporary-directory')
 var spawn = require('./helpers/spawn.js')
 var help = require('./helpers')
 
-var dat = path.resolve(path.join(__dirname, '..', 'bin', 'cli.js'))
+var dweb = path.resolve(path.join(__dirname, '..', 'bin', 'cli.js'))
 var fixtures = path.join(__dirname, 'fixtures')
 
 test('keys - print keys', function (t) {
   help.shareFixtures(function (_, shareDat) {
     shareDat.close(function () {
-      var cmd = dat + ' keys '
+      var cmd = dweb + ' keys '
       var st = spawn(t, cmd, { cwd: fixtures })
 
       st.stdout.match(function (output) {
-        if (output.indexOf('dat://') === -1) return false
+        if (output.indexOf('dweb://') === -1) return false
         t.ok(output.indexOf(shareDat.key.toString('hex') > -1), 'prints key')
         st.kill()
         return true
@@ -30,7 +30,7 @@ test('keys - print keys', function (t) {
 test('keys - print discovery key', function (t) {
   help.shareFixtures(function (_, shareDat) {
     shareDat.close(function () {
-      var cmd = dat + ' keys --discovery'
+      var cmd = dweb + ' keys --discovery'
       var st = spawn(t, cmd, { cwd: fixtures })
 
       st.stdout.match(function (output) {
@@ -51,9 +51,9 @@ if (!process.env.TRAVIS) {
     help.shareFixtures(function (_, shareDat) {
       var key = shareDat.key.toString('hex')
       tempDir(function (_, dir, cleanup) {
-        var cmd = dat + ' clone ' + key
+        var cmd = dweb + ' clone ' + key
         var st = spawn(t, cmd, { cwd: dir, end: false })
-        var datDir = path.join(dir, key)
+        var dwebDir = path.join(dir, key)
 
         st.stdout.match(function (output) {
           var downloadFinished = output.indexOf('Exiting') > -1
@@ -67,7 +67,7 @@ if (!process.env.TRAVIS) {
         function exchangeKeys () {
           var secretKey = null
 
-          var exportKey = dat + ' keys export'
+          var exportKey = dweb + ' keys export'
           var st = spawn(t, exportKey, { cwd: fixtures, end: false })
           st.stdout.match(function (output) {
             if (!output) return false
@@ -79,19 +79,19 @@ if (!process.env.TRAVIS) {
           st.stderr.empty()
 
           function importKey () {
-            var exportKey = dat + ' keys import'
-            var st = spawn(t, exportKey, { cwd: datDir })
+            var exportKey = dweb + ' keys import'
+            var st = spawn(t, exportKey, { cwd: dwebDir })
             st.stdout.match(function (output) {
               if (!output.indexOf('secret key') === -1) return false
               st.stdin.write(secretKey + '\r')
               if (output.indexOf('Successful import') === -1) return false
-              t.ok(fs.statSync(path.join(datDir, '.dat', 'metadata.ogd')), 'original dat file exists')
+              t.ok(fs.statSync(path.join(dwebDir, '.dweb', 'metadata.ogd')), 'original dWeb file exists')
               st.kill()
               return true
             })
             st.stderr.empty()
             st.end(function () {
-              rimraf.sync(path.join(fixtures, '.dat'))
+              rimraf.sync(path.join(fixtures, '.dweb'))
               cleanup()
             })
           }

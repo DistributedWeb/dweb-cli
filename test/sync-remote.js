@@ -4,13 +4,13 @@
 // var spawn = require('./helpers/spawn.js')
 // var help = require('./helpers')
 
-// var dat = path.resolve(path.join(__dirname, '..', 'bin', 'cli.js'))
+// var dweb = path.resolve(path.join(__dirname, '..', 'bin', 'cli.js'))
 // var baseTestDir = help.testFolder()
 // var shareDat
 // var syncDir
 
 // test('sync-remote - default opts', function (t) {
-//   // cmd: dat sync
+//   // cmd: dWeb archive synced
 //   var key
 
 //   help.shareFixtures({import: false}, function (_, fixturesDat) {
@@ -20,7 +20,7 @@
 
 //     makeClone(function () {
 //       shareDat.importFiles(function () {
-//         var cmd = dat + ' sync'
+//         var cmd = dweb + ' sync'
 //         var st = spawn(t, cmd, {cwd: syncDir})
 //         st.stdout.match(function (output) {
 //           var updated = output.indexOf('Files updated') > -1
@@ -32,7 +32,7 @@
 //           key = help.matchLink(output)
 
 //           t.ok(key, 'prints link')
-//           t.ok(output.indexOf('dat-download-folder/' + key) > -1, 'prints dir')
+//           t.ok(output.indexOf('dweb-download-folder/' + key) > -1, 'prints dir')
 //           t.ok(output.match(fileRe), 'total size: files okay')
 //           t.ok(output.match(bytesRe), 'total size: bytes okay')
 
@@ -46,7 +46,7 @@
 //   })
 
 //   function makeClone (cb) {
-//     var cmd = dat + ' clone ' + key
+//     var cmd = dweb + ' clone ' + key
 //     var st = spawn(t, cmd, {cwd: baseTestDir, end: false})
 //     st.stdout.match(function (output) {
 //       var downloadFinished = output.indexOf('Download Finished') > -1
@@ -61,11 +61,11 @@
 // })
 
 // test('sync-remote - shorthand sync', function (t) {
-//   // cmd: dat sync
-//   var cmd = dat + ' .'
+//   // cmd: dWeb archive synced
+//   var cmd = dweb + ' .'
 //   var st = spawn(t, cmd, {cwd: syncDir})
 //   st.stdout.match(function (output) {
-//     var syncing = output.indexOf('Syncing Dat Archive') > -1
+//     var syncing = output.indexOf('Syncing DWeb Archive') > -1
 //     if (!syncing) return false
 //     t.ok(help.matchLink(output), 'prints link')
 //     st.kill()
@@ -76,10 +76,10 @@
 // })
 
 // test('sync-remote - dir arg', function (t) {
-//   var cmd = dat + ' ' + syncDir
+//   var cmd = dweb + ' ' + syncDir
 //   var st = spawn(t, cmd)
 //   st.stdout.match(function (output) {
-//     var syncing = output.indexOf('Syncing Dat Archive') > -1
+//     var syncing = output.indexOf('Syncing DWeb Archive') > -1
 //     if (!syncing) return false
 //     t.ok(help.matchLink(output), 'prints link')
 //     st.kill()
@@ -91,7 +91,7 @@
 
 // test('close sharer', function (t) {
 //   shareDat.close(function () {
-//     rimraf.sync(path.join(shareDat.path, '.dat'))
+//     rimraf.sync(path.join(shareDat.path, '.dweb'))
 //     t.end()
 //   })
 // })

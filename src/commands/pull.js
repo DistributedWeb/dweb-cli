@@ -2,15 +2,15 @@ module.exports = {
   name: 'pull',
   command: pull,
   help: [
-    'Pull updates from a cloned Dat archive',
+    'Pull updates from a cloned dWeb archive',
     '',
-    'Usage: dat pull'
+    'Usage: dweb pull'
   ].join('\n'),
   options: [
     {
       name: 'exit',
       boolean: false,
-      help: 'exit after specified number of seconds (gives the dat network time to find updates). defaults to 12 seconds.'
+      help: 'exit after specified number of seconds (gives the dWeb network time to find updates). defaults to 12 seconds.'
     },
 
     {
@@ -22,7 +22,7 @@ module.exports = {
     {
       name: 'selectFromFile',
       boolean: false,
-      default: '.datdownload',
+      default: '.dwebdownload',
       help: 'Sync only the list of selected files or directories in the given file.',
       abbr: 'select-from-file'
     },
@@ -37,13 +37,13 @@ module.exports = {
       boolean: true,
       default: false,
       abbr: 'k',
-      help: 'print out the dat key'
+      help: 'print out the dweb key'
     }
   ]
 }
 
 function pull (opts) {
-  var Dat = require('dat-node')
+  var DWeb = require('dwebs-core')
   var neatLog = require('neat-log')
   var archiveUI = require('../ui/archive')
   var trackArchive = require('../lib/archive')
@@ -51,9 +51,9 @@ function pull (opts) {
   var discoveryExit = require('../lib/discovery-exit')
   var onExit = require('../lib/exit')
   var parseArgs = require('../parse-args')
-  var debug = require('debug')('dat')
+  var debug = require('debug')('dweb')
 
-  debug('dat pull')
+  debug('dweb pull')
   if (!opts.dir) {
     var parsed = parseArgs(opts)
     opts.key = parsed.key
@@ -78,13 +78,13 @@ function pull (opts) {
     state.opts = opts
     selectiveSync(state, opts)
 
-    Dat(opts.dir, opts, function (err, dat) {
+    DWeb(opts.dir, opts, function (err, dweb) {
       if (err && err.name === 'MissingError') return bus.emit('exit:warn', 'No existing archive in this directory. Use clone to download a new archive.')
       if (err) return bus.emit('exit:error', err)
-      if (dat.writable) return bus.emit('exit:warn', 'Archive is writable. Cannot pull your own archive.')
+      if (dweb.writable) return bus.emit('exit:warn', 'Archive is writable. Cannot pull your own archive.')
 
-      state.dat = dat
-      bus.emit('dat')
+      state.dweb = dweb
+      bus.emit('dweb')
       bus.emit('render')
     })
   })

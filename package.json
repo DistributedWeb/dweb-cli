@@ -1,10 +1,10 @@
 {
   "name": "dweb-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Official command-line tool for the dWeb",
   "keywords": [
-    "dat",
-    "dat protocol",
+    "dweb",
+    "dweb protocol",
     "hyperdrive",
     "decentralized",
     "file sharing"
@@ -21,18 +21,18 @@
     "test": "standard && npm run deps && tape 'test/*.js'",
     "test-only": "tape 'test/*.js'",
     "package": "rm -rf builds && npm run pkg && ./package.sh",
-    "pkg": "pkg package.json -o builds/dat"
+    "pkg": "pkg package.json -o builds/dweb"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/datproject/dat.git"
+    "url": "git://github.com/datproject/dweb.git"
   },
-  "author": "Dat Project",
+  "author": "DWeb Project",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/datproject/dat/issues"
+    "url": "https://github.com/distributedweb/dweb-cliissues"
   },
-  "homepage": "https://datproject.org",
+  "homepage": "https://dwebx.org",
   "directories": {
     "test": "tests"
   },
@@ -45,7 +45,7 @@
     "dweb-json": "^1.0.0",
     "dweb-link-resolve": "^1.0.0",
     "dweb-log": "^1.0.0",
-    "dweb-core": "^1.0.0",
+    "dwebs-core": "^1.0.0",
     "dweb-registry": "^1.0.0",
     "debug": "^4.0.0",
     "neat-log": "^3.1.0",

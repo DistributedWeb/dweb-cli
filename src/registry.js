@@ -1,11 +1,11 @@
 var xtend = Object.assign
-var RegistryClient = require('dat-registry')
+var RegistryClient = require('dweb-registry')
 
 module.exports = function (opts) {
   var townshipOpts = {
     server: opts.server,
     config: {
-      filepath: opts.config // defaults to ~/.datrc via dat-registry
+      filepath: opts.config // defaults to ~/.dwebrc via dweb-registry
     }
   }
   var defaults = {

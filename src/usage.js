@@ -5,39 +5,39 @@ module.exports = function (opts, help, usage) {
     process.exit(1)
   }
   var msg = `
-Usage: dat <cmd> [<dir>] [options]
+Usage: dweb <cmd> [<dir>] [options]
 
 Sharing Files:
-   dat share                   create dat, import files, share to network
-   dat create                  create empty dat and dat.json
-   dat sync                    import files to existing dat & sync with network
+   dweb share                   create dWeb archive, import files, share to network
+   dweb create                  create empty dWeb archive and dweb.json
+   dWeb archive synced                    import files to existing dWeb archive & sync with network
 
 Downloading Files:
-   dat clone <link> [<dir>]    download a dat via link to <dir>
-   dat pull                    update dat & exit
-   dat sync                    live sync files with the network
+   dweb clone <link> [<dir>]    download a dWeb archive via link to <dir>
+   dweb pull                    update dWeb archive & exit
+   dWeb archive synced                    live sync files with the network
 
 Info:
-   dat log                     log history for a dat
-   dat status                  get key & info about a local dat
+   dweb log                     log history for a dWeb archive
+   dweb status                  get key & info about a local dWeb archive
 
-Dat public registries:
-   dat <cmd> [<registry>]      All commands take <registry> option
-   dat register                register new account
-   dat login                   login to your account
-   dat publish                 publish a dat
-   dat whoami                  print active login information
-   dat logout                  logout from active login
+DWeb public registries:
+   dweb <cmd> [<registry>]      All commands take <registry> option
+   dweb register                register new account
+   dweb login                   login to your account
+   dweb publish                 publish a dWeb archive
+   dweb whoami                  print active login information
+   dweb logout                  logout from active login
 
 Stateless/Shortcut Commands:
-   dat <link> [<dir>]          clone or sync link to <dir>
-   dat <dir>                   create and sync dat in directory
+   dweb <link> [<dir>]          clone or sync link to <dir>
+   dweb <dir>                   create and sync dWeb archive in directory
 
 Troubleshooting & Help:
-   dat doctor                  run the dat network doctor
-   dat help                    print this usage guide
-   dat <command> --help, -h    print help for a specific command
-   dat --version, -v           print the dat version
+   dweb doctor                  run the dWeb network doctor
+   dweb help                    print this usage guide
+   dweb <command> --help, -h    print help for a specific command
+   dweb --version, -v           print the dWeb version
 
   `
   console.error(msg)
@@ -45,6 +45,6 @@ Troubleshooting & Help:
     console.error('General Options:')
     console.error(usage)
   }
-  console.error('Have fun using Dat! Learn more at docs.datproject.org')
+  console.error('Have fun using dWeb CLI! Learn more at docs.dwebx.org')
   process.exit(1)
 }

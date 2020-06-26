@@ -1,4 +1,4 @@
-var debug = require('debug')('dat')
+var debug = require('debug')('dweb')
 var os = require('os')
 
 module.exports = runExtension
@@ -9,13 +9,13 @@ function runExtension (opts) {
   var extName = opts._.shift()
   trySpawn(function () {
     console.error('We could not run the extension. Please make sure it is installed:')
-    console.error(`npm install -g dat-${extName}`)
+    console.error(`npm install -g dweb-${extName}`)
     process.exit(1)
   })
 
   function trySpawn (cb) {
     var spawn = require('child_process').spawn
-    var name = 'dat-' + extName
+    var name = 'dweb-' + extName
     if (os.platform() === 'win32') {
       name += '.cmd'
     }

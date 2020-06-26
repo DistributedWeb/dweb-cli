@@ -2,10 +2,10 @@ module.exports = {
   name: 'share',
   command: share,
   help: [
-    'Create and share a dat',
-    'Create a dat, import files, and share to the network.',
+    'Create and share a dWeb archive',
+    'Create a dWeb archive, import files, and share to the network.',
     '',
-    'Usage: dat share'
+    'Usage: dweb share'
   ].join('\n'),
   options: [
     {
@@ -30,13 +30,13 @@ module.exports = {
 }
 
 function share (opts) {
-  var Dat = require('dat-node')
+  var DWeb = require('dwebs-core')
   var neatLog = require('neat-log')
   var archiveUI = require('../ui/archive')
   var trackArchive = require('../lib/archive')
   var onExit = require('../lib/exit')
   var parseArgs = require('../parse-args')
-  var debug = require('debug')('dat')
+  var debug = require('debug')('dweb')
 
   if (!opts.dir) {
     opts.dir = parseArgs(opts).dir || process.cwd()
@@ -51,13 +51,13 @@ function share (opts) {
   neat.use(function (state, bus) {
     state.opts = opts
 
-    Dat(opts.dir, opts, function (err, dat) {
-      if (err && err.name === 'IncompatibleError') return bus.emit('exit:warn', 'Directory contains incompatible dat metadata. Please remove your old .dat folder (rm -rf .dat)')
+    DWeb(opts.dir, opts, function (err, dweb) {
+      if (err && err.name === 'IncompatibleError') return bus.emit('exit:warn', 'Directory contains incompatible dWeb metadata. Please remove your old .dweb folder (rm -rf .dweb)')
       else if (err) return bus.emit('exit:error', err)
-      if (!dat.writable && !opts.shortcut) return bus.emit('exit:warn', 'Archive not writable, cannot use share. Please use sync to resume download.')
+      if (!dweb.writable && !opts.shortcut) return bus.emit('exit:warn', 'Archive not writable, cannot use share. Please use sync to resume download.')
 
-      state.dat = dat
-      bus.emit('dat')
+      state.dweb = dweb
+      bus.emit('dweb')
       bus.emit('render')
     })
   })

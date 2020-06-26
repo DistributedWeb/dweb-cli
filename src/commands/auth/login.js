@@ -2,16 +2,16 @@ module.exports = {
   name: 'login',
   command: login,
   help: [
-    'Login to a Dat registry server',
-    'Usage: dat login [<registry>]',
+    'Login to a dWeb registry server',
+    'Usage: dweb login [<registry>]',
     '',
-    'Publish your dats so other users can discovery them.',
+    'Publish your dWeb archives so other users can discovery them.',
     'Please register before trying to login.'
   ].join('\n'),
   options: [
     {
       name: 'server',
-      help: 'Your Dat registry server (must be registered to login).'
+      help: 'Your dWeb registry server (must be registered to login).'
     }
   ]
 }
@@ -24,8 +24,8 @@ function login (opts) {
 
   if (opts._[0]) opts.server = opts._[0]
   var welcome = output(`
-    Welcome to ${chalk.green(`dat`)} program!
-    Login to publish your dats.
+    Welcome to ${chalk.green(`dweb`)} program!
+    Login to publish your dwebs.
 
   `)
   console.log(welcome)
@@ -33,8 +33,8 @@ function login (opts) {
   var schema = {
     properties: {
       server: {
-        description: chalk.magenta('Dat registry'),
-        default: opts.server || 'datbase.org',
+        description: chalk.magenta('dWeb registry'),
+        default: opts.server || 'registry.dwebx.net',
         required: true
       },
       email: {
@@ -74,8 +74,8 @@ function login (opts) {
         Logged you in to ${chalk.green(opts.server)}!
 
         Now you can publish dats and share:
-        * Run ${chalk.green(`dat publish`)} to publish a dat!
-        * View & Share your dats at ${opts.server}
+        * Run ${chalk.green(`dweb publish`)} to publish a dWeb archive!
+        * View & Share your dWeb archives at ${opts.server}
       `))
       process.exit(0)
     })

@@ -2,29 +2,29 @@ var fs = require('fs')
 var path = require('path')
 var test = require('tape')
 var tempDir = require('temporary-directory')
-var Dat = require('dat-node')
+var DWeb = require('dwebs-core')
 var spawn = require('./helpers/spawn.js')
 var help = require('./helpers')
 
-var dat = path.resolve(path.join(__dirname, '..', 'bin', 'cli.js'))
+var dweb = path.resolve(path.join(__dirname, '..', 'bin', 'cli.js'))
 var fixtures = path.join(__dirname, 'fixtures')
 
 // os x adds this if you view the fixtures in finder and breaks the file count assertions
 try { fs.unlinkSync(path.join(fixtures, '.DS_Store')) } catch (e) { /* ignore error */ }
 
-// start without dat.json
-try { fs.unlinkSync(path.join(fixtures, 'dat.json')) } catch (e) { /* ignore error */ }
+// start without dweb.json
+try { fs.unlinkSync(path.join(fixtures, 'dweb.json')) } catch (e) { /* ignore error */ }
 
 test('create - default opts no import', function (t) {
   tempDir(function (_, dir, cleanup) {
-    var cmd = dat + ' create --title data --description thing'
+    var cmd = dweb + ' create --title data --description thing'
     var st = spawn(t, cmd, { cwd: dir })
 
     st.stdout.match(function (output) {
-      var datCreated = output.indexOf('Created empty Dat') > -1
-      if (!datCreated) return false
+      var dwebCreated = output.indexOf('Created empty dWeb archive') > -1
+      if (!dwebCreated) return false
 
-      t.ok(help.isDir(path.join(dir, '.dat')), 'creates dat directory')
+      t.ok(help.isDir(path.join(dir, '.dweb')), 'creates dWeb archive directory')
 
       st.kill()
       return true
@@ -37,10 +37,10 @@ test('create - default opts no import', function (t) {
 
 test('create - errors on existing archive', function (t) {
   tempDir(function (_, dir, cleanup) {
-    Dat(dir, function (err, dat) {
+    DWeb(dir, function (err, dweb) {
       t.error(err, 'no error')
-      dat.close(function () {
-        var cmd = dat + ' create --title data --description thing'
+      dweb.close(function () {
+        var cmd = dweb + ' create --title data --description thing'
         var st = spawn(t, cmd, { cwd: dir })
         st.stderr.match(function (output) {
           t.ok(output, 'errors')
@@ -55,17 +55,17 @@ test('create - errors on existing archive', function (t) {
 
 test('create - sync after create ok', function (t) {
   tempDir(function (_, dir, cleanup) {
-    var cmd = dat + ' create --title data --description thing'
+    var cmd = dweb + ' create --title data --description thing'
     var st = spawn(t, cmd, { cwd: dir, end: false })
     st.stdout.match(function (output) {
-      var connected = output.indexOf('Created empty Dat') > -1
+      var connected = output.indexOf('Created empty dWeb archive') > -1
       if (!connected) return false
       doSync()
       return true
     })
 
     function doSync () {
-      var cmd = dat + ' sync '
+      var cmd = dweb + ' sync '
       var st = spawn(t, cmd, { cwd: dir })
 
       st.stdout.match(function (output) {
@@ -82,14 +82,14 @@ test('create - sync after create ok', function (t) {
 
 test('create - init alias', function (t) {
   tempDir(function (_, dir, cleanup) {
-    var cmd = dat + ' init --title data --description thing'
+    var cmd = dweb + ' init --title data --description thing'
     var st = spawn(t, cmd, { cwd: dir })
 
     st.stdout.match(function (output) {
-      var datCreated = output.indexOf('Created empty Dat') > -1
-      if (!datCreated) return false
+      var dwebCreated = output.indexOf('Created empty dWeb archive') > -1
+      if (!dwebCreated) return false
 
-      t.ok(help.isDir(path.join(dir, '.dat')), 'creates dat directory')
+      t.ok(help.isDir(path.join(dir, '.dweb')), 'creates dWeb archive directory')
 
       st.kill()
       return true
@@ -102,13 +102,13 @@ test('create - init alias', function (t) {
 
 test('create - with path', function (t) {
   tempDir(function (_, dir, cleanup) {
-    var cmd = dat + ' init ' + dir + ' --title data --description thing'
+    var cmd = dweb + ' init ' + dir + ' --title data --description thing'
     var st = spawn(t, cmd)
     st.stdout.match(function (output) {
-      var datCreated = output.indexOf('Created empty Dat') > -1
-      if (!datCreated) return false
+      var dwebCreated = output.indexOf('Created empty dWeb archive') > -1
+      if (!dwebCreated) return false
 
-      t.ok(help.isDir(path.join(dir, '.dat')), 'creates dat directory')
+      t.ok(help.isDir(path.join(dir, '.dweb')), 'creates dWeb archive directory')
 
       st.kill()
       return true

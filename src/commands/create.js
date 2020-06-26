@@ -2,9 +2,9 @@ module.exports = {
   name: 'create',
   command: create,
   help: [
-    'Create an empty dat and dat.json',
+    'Create an empty dWeb archive and dweb.json',
     '',
-    'Usage: dat create [directory]'
+    'Usage: dweb create [directory]'
   ].join('\n'),
   options: [
     {
@@ -12,15 +12,15 @@ module.exports = {
       boolean: true,
       default: false,
       abbr: 'y',
-      help: 'Skip dat.json creation.'
+      help: 'Skip dweb.json creation.'
     },
     {
       name: 'title',
-      help: 'the title property for dat.json'
+      help: 'the title property for dweb.json'
     },
     {
       name: 'description',
-      help: 'the description property for dat.json'
+      help: 'the description property for dweb.json'
     }
   ]
 }
@@ -28,29 +28,29 @@ module.exports = {
 function create (opts) {
   var path = require('path')
   var fs = require('fs')
-  var Dat = require('dat-node')
+  var DWeb = require('dwebs-core')
   var output = require('neat-log/output')
-  var DatJson = require('dat-json')
+  var DWebJson = require('dweb-json')
   var prompt = require('prompt')
   var chalk = require('chalk')
   var parseArgs = require('../parse-args')
-  var debug = require('debug')('dat')
+  var debug = require('debug')('dweb')
 
-  debug('dat create')
+  debug('dweb create')
   if (!opts.dir) {
     opts.dir = parseArgs(opts).dir || process.cwd()
   }
 
-  var welcome = `Welcome to ${chalk.green(`dat`)} program!`
+  var welcome = `Welcome to ${chalk.green(`dweb`)} program!`
   var intro = output(`
-    You can turn any folder on your computer into a Dat.
-    A Dat is a folder with some magic.
+    You can turn any folder on your computer into a dWeb archive.
+    A dWeb archive is a folder with some magic.
 
-    Your dat is ready!
-    We will walk you through creating a 'dat.json' file.
-    (You can skip dat.json and get started now.)
+    Your dWeb archive is ready!
+    We will walk you through creating a 'dweb.json' file.
+    (You can skip dweb.json and get started now.)
 
-    Learn more about dat.json: ${chalk.blue(`https://github.com/datprotocol/dat.json`)}
+    Learn more about dweb.json: ${chalk.blue(`https://github.com/distributedweb/dweb.json`)}
 
     ${chalk.dim('Ctrl+C to exit at any time')}
 
@@ -61,29 +61,29 @@ function create (opts) {
   opts.errorIfExists = true
 
   console.log(welcome)
-  Dat(opts.dir, opts, function (err, dat) {
-    if (err && err.name === 'ExistsError') return exitErr('\nArchive already exists.\nYou can use `dat sync` to update.')
+  DWeb(opts.dir, opts, function (err, dweb) {
+    if (err && err.name === 'ExistsError') return exitErr('\nArchive already exists.\nYou can use `dWeb archive synced` to update.')
     if (err) return exitErr(err)
 
     outro = output(`
 
-      Created empty Dat in ${dat.path}/.dat
+      Created empty dWeb archive in ${dweb.path}/.dweb
 
       Now you can add files and share:
-      * Run ${chalk.green(`dat share`)} to create metadata and sync.
-      * Copy the unique dat link and securely share it.
+      * Run ${chalk.green(`dweb share`)} to create metadata and sync.
+      * Copy the unique dweb link and securely share it.
 
-      ${chalk.blue(`dat://${dat.key.toString('hex')}`)}
+      ${chalk.blue(`dweb://${dweb.key.toString('hex')}`)}
     `)
 
     if (opts.yes) return done()
 
     console.log(intro)
-    var datjson = DatJson(dat.archive, { file: path.join(opts.dir, 'dat.json') })
-    fs.readFile(path.join(opts.dir, 'dat.json'), 'utf-8', function (err, data) {
+    var dwebjson = DWebJson(dweb.archive, { file: path.join(opts.dir, 'dweb.json') })
+    fs.readFile(path.join(opts.dir, 'dweb.json'), 'utf-8', function (err, data) {
       if (err || !data) return doPrompt()
       data = JSON.parse(data)
-      debug('read existing dat.json data', data)
+      debug('read existing dweb.json data', data)
       doPrompt(data)
     })
 
@@ -110,12 +110,12 @@ function create (opts) {
       prompt.message = '' // chalk.green('> ')
       // prompt.delimiter = ''
       prompt.start()
-      prompt.get(schema, writeDatJson)
+      prompt.get(schema, writeDWebJson)
 
-      function writeDatJson (err, results) {
+      function writeDWebJson (err, results) {
         if (err) return exitErr(err) // prompt error
         if (!results.title && !results.description) return done()
-        datjson.create(results, done)
+        dwebjson.create(results, done)
       }
     }
 

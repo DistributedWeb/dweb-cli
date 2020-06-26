@@ -2,15 +2,15 @@ module.exports = {
   name: 'register',
   command: register,
   help: [
-    'Register with a public Dat registry',
-    'Usage: dat register [<registry>]',
+    'Register with a public dWeb registry',
+    'Usage: dweb register [<registry>]',
     '',
-    'Register with datbase.org or other registries to publish your dats.'
+    'Register with registry.dwebx.net or other registries to publish your dwebs.'
   ].join('\n'),
   options: [
     {
       name: 'server',
-      help: 'Your Dat registry.'
+      help: 'Your dWeb registry.'
     }
   ]
 }
@@ -24,8 +24,8 @@ function register (opts) {
   // TODO: check if logged in?
   if (opts._[0]) opts.server = opts._[0]
   var welcome = output(`
-    Welcome to ${chalk.green(`dat`)} program!
-    Create a new account with a Dat registry.
+    Welcome to ${chalk.green(`dweb`)} program!
+    Create a new account with a dWeb registry.
 
   `)
   console.log(welcome)
@@ -33,8 +33,8 @@ function register (opts) {
   var schema = {
     properties: {
       server: {
-        description: chalk.magenta('Dat registry'),
-        default: opts.server || 'datbase.org',
+        description: chalk.magenta('dWeb registry'),
+        default: opts.server || 'registry.dwebx.net',
         required: true
       },
       username: {
@@ -79,7 +79,7 @@ function register (opts) {
       console.log(output(`
         Created account on ${chalk.green(opts.server)}!
 
-        Login to start publishing: ${chalk.green(`dat login`)}
+        Login to start publishing: ${chalk.green(`dweb login`)}
       `))
       process.exit(0)
     })

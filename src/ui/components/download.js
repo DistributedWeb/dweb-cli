@@ -12,22 +12,22 @@ function networkUI (state) {
   var downBar = makeBar()
 
   if (download.nsync) {
-    if (state.opts.exit && state.dat.archive.version === 0) {
-      return 'dat synced. There is no content in this archive.'
+    if (state.opts.exit && state.dweb.archive.version === 0) {
+      return 'dWeb archive synced. There is no content in this archive.'
     }
     if (state.opts.exit && download.modified) {
-      return `dat sync complete.\nVersion ${stats.version}`
+      return `dWeb archive synced complete.\nVersion ${stats.version}`
     }
 
     if (!download.modified && state.opts.exit) {
-      title = `dat already in sync, waiting for updates.`
+      title = `dweb already in sync, waiting for updates.`
     } else {
-      title = `dat synced, waiting for updates.`
+      title = `dWeb archive synced, waiting for updates.`
     }
   }
 
   if (state.opts.exit) {
-    title = `dat synced, exiting in ${state.opts.exit} seconds.`
+    title = `dWeb archive synced, exiting in ${state.opts.exit} seconds.`
   }
 
   if (!stats.downloaded || !stats.length) {

@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 var subcommand = require('subcommand')
-var debug = require('debug')('dat')
+var debug = require('debug')('dweb')
 var usage = require('../src/usage')
 var pkg = require('../package.json')
 
-process.title = 'dat'
+process.title = 'dweb'
 
 // Check node version to make sure we support
 var NODE_VERSION_SUPPORTED = 4
@@ -29,18 +29,18 @@ else {
 }
 
 if (debug.enabled) {
-  debug('Dat DEBUG mode engaged, enabling quiet mode')
+  debug('dWeb DEBUG mode engaged, enabling quiet mode')
 }
 
 var config = {
   defaults: [
-    { name: 'dir', abbr: 'd', help: 'set the directory for Dat' },
+    { name: 'dir', abbr: 'd', help: 'set the directory for DWeb' },
     { name: 'logspeed', default: 400 },
-    { name: 'port', help: 'port to use for connections (default port: 3282 or first available)' },
+    { name: 'port', help: 'port to use for connections (default port: 6620 or first available)' },
     { name: 'utp', default: true, boolean: true, help: 'use utp for discovery' },
-    { name: 'http', help: 'serve dat over http (default port: 8080)' },
+    { name: 'http', help: 'serve dweb over http (default port: 8080)' },
     { name: 'debug', default: !!process.env.DEBUG && !debug.enabled, boolean: true },
-    { name: 'quiet', default: debug.enabled, boolean: true }, // use quiet for dat debugging
+    { name: 'quiet', default: debug.enabled, boolean: true }, // use quiet for dweb debugging
     { name: 'sparse', default: false, boolean: true, help: 'download only requested data' },
     { name: 'up', help: 'throttle upload bandwidth (1024, 1kb, 2mb, etc.)' },
     { name: 'down', help: 'throttle download bandwidth (1024, 1kb, 2mb, etc.)' }
@@ -91,7 +91,7 @@ var config = {
 }
 
 if (debug.enabled) {
-  debug('dat', pkg.version)
+  debug('dweb', pkg.version)
   debug('node', process.version)
 }
 
@@ -108,9 +108,9 @@ function alias (argv) {
 
 // CLI Shortcuts
 // Commands:
-//   dat <dat://key> [<dir>] - clone/sync a key
-//   dat <dir> - create dat + share a directory
-//   dat <extension>
+//   dweb <dweb://key> [<dir>] - clone/sync a key
+//   dweb <dir> - create dWeb archive + share a directory
+//   dweb <extension>
 function syncShorthand (opts) {
   if (!opts._.length) return usage(opts)
   debug('Sync shortcut command')
@@ -123,7 +123,7 @@ function syncShorthand (opts) {
 
   // Download Key
   if (parsed.key) {
-    // dat  <dat://key> [<dir>] - clone/resume <link> in [dir]
+    // dweb  <dweb://key> [<dir>] - clone/resume <link> in [dir]
     debug('Clone sync')
     opts.dir = parsed.dir || parsed.key // put in `process.cwd()/key` if no dir
     opts.exit = opts.exit || false
@@ -131,7 +131,7 @@ function syncShorthand (opts) {
   }
 
   // Sync dir
-  // dat <dir> - sync existing dat in {dir}
+  // dweb <dir> - sync existing dWeb archive in {dir}
   if (parsed.dir) {
     opts.shortcut = true
     debug('Share sync')
@@ -154,7 +154,7 @@ function showUsageOrRunExtension (opts, help, usageMessage) {
 
 function exitInvalidNode () {
   console.error('Node Version:', process.version)
-  console.error('Unfortunately, we only support Node >= v4. Please upgrade to use Dat.')
+  console.error('Unfortunately, we only support Node >= v4. Please upgrade to use dWeb.')
   console.error('You can find the latest version at https://nodejs.org/')
   process.exit(1)
 }
