@@ -1,6 +1,6 @@
 {
   "name": "dweb-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Official command-line tool for the dWeb",
   "keywords": [
     "dweb",
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/datproject/dweb.git"
+    "url": "git://github.com/DistributedWeb/dweb-cli"
   },
   "author": "DWeb Project",
   "license": "BSD-3-Clause",
