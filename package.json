@@ -1,6 +1,6 @@
 {
   "name": "dweb-cli",
-  "version": "1.0.2",
+  "version": "1.4.0",
   "description": "Official command-line tool for the dWeb",
   "keywords": [
     "dweb",
@@ -40,12 +40,12 @@
     "bytes": "^3.1.0",
     "chalk": "^2.4.2",
     "cli-truncate": "^1.0.0",
-    "dweb-doctor": "^1.0.0",
+    "dweb-doctor": "1.3.0",
     "dweb-encoding": "^1.0.0",
     "dweb-json": "^1.0.0",
     "dweb-link-resolve": "^1.0.0",
     "dweb-log": "^1.0.0",
-    "dwebs-core": "^1.0.0",
+    "dwebs-core": "1.4.0",
     "dweb-registry": "^1.0.0",
     "debug": "^4.0.0",
     "neat-log": "^3.1.0",
