@@ -45,7 +45,7 @@
     "dweb-json": "^1.0.0",
     "dweb-link-resolve": "^1.0.0",
     "dweb-log": "^1.0.0",
-    "dwebs-core": "1.5.0",
+    "dwebs-core": "git://github.com/DistributedWeb/dweb-core.git#0d05405b34abfab5ab11bb96c96fa5013c4d1b1b",
     "dweb-registry": "^1.0.0",
     "debug": "^4.0.0",
     "neat-log": "^3.1.0",
@@ -62,7 +62,7 @@
   "devDependencies": {
     "cross-zip-cli": "^1.0.0",
     "dependency-check": "^3.3.0",
-    "ddatabase": "^1.3.0",
+    "ddatabase": "git://github.com/DistributedWeb/ddatabase.git#b5aeea1f813f0985505fc8f80e4dc57fa1e14b6d",
     "dweb-discovery": "^1.0.0",
     "mkdirp": "^0.5.1",
     "pkg": "^4.3.7",
