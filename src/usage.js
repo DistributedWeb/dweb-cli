@@ -21,14 +21,6 @@ Info:
    dweb log                     log history for a dWeb archive
    dweb status                  get key & info about a local dWeb archive
 
-DWeb public registries:
-   dweb <cmd> [<registry>]      All commands take <registry> option
-   dweb register                register new account
-   dweb login                   login to your account
-   dweb publish                 publish a dWeb archive
-   dweb whoami                  print active login information
-   dweb logout                  logout from active login
-
 Stateless/Shortcut Commands:
    dweb <link> [<dir>]          clone or sync link to <dir>
    dweb <dir>                   create and sync dWeb archive in directory
